@@ -14,3 +14,5 @@ Optionally uses the [HPF library](https://uk.mathworks.com/matlabcentral/fileexc
 ### TODO
 - [ ] Round high precision floats properly.
 - [ ] Convert to/from fixed point binary vectors e.g. `[1 0 1 1]` as this is needed for real use and communications toolkit usage.
+- [ ] Measure compression ratio
+- [ ] Measure entropy before/after
