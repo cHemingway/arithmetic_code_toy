@@ -1,9 +1,14 @@
 % Chris Hemingway 2019
 
-function [data,debug_table] = arithmetic_decode(code, range_table)
+function [data,debug_table] = arithmetic_decode(code, range_table, terminator)
 %ARITHMETIC_DECODE decode data from given range table
 
 debug_cells = {};
+
+% Support custom terminator
+if nargin < 3
+    terminator = '$';
+end
 
 % Would convert binary code to decimal here
 value = code;
@@ -23,7 +28,7 @@ while true
     
     value = (value - low) / range;
 
-    if s == '$' % Until symbol s is a terminator
+    if s == terminator % Until symbol s is a terminator
         break
     end 
 end

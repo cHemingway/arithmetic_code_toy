@@ -1,15 +1,19 @@
 % Chris Hemingway 2019
 
-function code = arithmetic_encode(data, range_table)
+function code = arithmetic_encode(data, range_table, terminator)
 %ARITHMETIC_ENCODE encode data with given range table
 
 % Convert to character array so we can support strings.
 % Not part of algorithm, but allows double quotes e.g. "abc" and 'abc'
 data = char(data);
 
+if nargin < 3 % Were we given custom string termination?
+    terminator = '$';
+end
+
 % Terminate if not done, not part of algorithm, but would be needed
-if data(end) ~= '$'
-   data(end+1) = '$'; 
+if data(end) ~= terminator
+   data(end+1) = terminator; 
 end
 
 if exist('hpf')
