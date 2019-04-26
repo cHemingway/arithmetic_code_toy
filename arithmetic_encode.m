@@ -1,11 +1,13 @@
 % Chris Hemingway 2019
 
-function code = arithmetic_encode(data, range_table, terminator)
+function [code,debug_table] = arithmetic_encode(data, range_table, terminator)
 %ARITHMETIC_ENCODE encode data with given range table
 
 % Convert to character array so we can support strings.
 % Not part of algorithm, but allows double quotes e.g. "abc" and 'abc'
 data = char(data);
+
+debug_cells = {};
 
 if nargin < 3 % Were we given custom string termination?
     terminator = '$';
@@ -21,12 +23,22 @@ if exist('hpf')
 else
     low = 0.0; high = 1.0; range = 1.0;
 end
-for c = data
-   high = low + range * range_table(c).high;
-   low = low + range * range_table(c).low;
+for s = data
+   high = low + range * range_table(s).high;
+   low = low + range * range_table(s).low;
    range = high - low;
+   % Save for debug
+   debug_cells =[debug_cells ; {s, low, high, range}];
 end
+
 code = output_code(low, high);
+    
+% Debug, output table
+if nargout > 1
+    variable_names = {'Symbol', 'low', 'high', 'range'};
+    debug_table = cell2table(debug_cells,'VariableNames',variable_names);
+end
+
 end
 
 
