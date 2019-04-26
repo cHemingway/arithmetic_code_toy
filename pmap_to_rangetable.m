@@ -1,6 +1,9 @@
 function range_table = pmap_to_rangetable(p_map)
-    % Convert pmap to range table
-    % Sort the symbols, to match examples etc, not actually needed
+    %PMAP_TO_RANGE_TABLE convert {symbol,prob} to {symbol,interval}
+    % pmap is containers.map of p_map[prob] = prob
+    % prob is scalar probability of symbol
+    % Output is continers.map range_table[symbol] = interval 
+    % interval is interval(low,high)
 symbols = sort(keys(p_map));
 
 % Find the ranges for each table
